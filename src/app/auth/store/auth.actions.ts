@@ -10,7 +10,7 @@ export const registerAction = createAction(
 );
 
 export const registerSuccessAction = createAction(
-  ActionTypes.REGISTER_SUCESS,
+  ActionTypes.REGISTER_SUCCESS,
   props<{ currentUser: CurrentUserInterface }>()
 );
 

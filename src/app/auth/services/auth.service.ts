@@ -1,18 +1,18 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { map, Observable } from "rxjs";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { map, Observable } from 'rxjs';
 
-import { CurrentUserInteface } from "src/app/shared/types/currentUser.interface";
-import { RegisterRequestInterface } from "src/app/shared/types/registerRequest.interface";
-import { environment } from "src/environments/environment";
-import { AuthResponseInterface } from "src/app/shared/types/authResponse.interface";
+import { CurrentUserInteface } from 'src/app/shared/types/currentUser.interface';
+import { RegisterRequestInterface } from 'src/app/shared/types/registerRequest.interface';
+import { environment } from 'src/environments/environment';
+import { AuthResponseInterface } from 'src/app/shared/types/authResponse.interface';
 
 @Injectable()
 export class AuthService {
   constructor(private http: HttpClient) {}
 
   register(data: RegisterRequestInterface): Observable<CurrentUserInteface> {
-    const url = environment.apiUrl + "/users";
+    const url = environment.apiUrl + '/users';
     return this.http
       .post<AuthResponseInterface>(url, data)
       .pipe(map((response: AuthResponseInterface) => response.user));

@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 import { EffectsModule } from '@ngrx/effects';
 import { RegisterEffect } from 'src/app/auth/store/effects/register.effect';
 import { errorHandlerModule } from 'src/app/shared/modules/errorHandler/errorHandler.module';
+import { LocalStorageService } from 'src/app/shared/services/localStorage.service';
 
 const routes = [
   {
@@ -28,6 +29,6 @@ const routes = [
     errorHandlerModule,
   ],
   declarations: [RegisterComponent],
-  providers: [AuthService],
+  providers: [AuthService, LocalStorageService],
 })
 export class AuthModule {}

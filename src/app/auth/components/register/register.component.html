@@ -5,7 +5,11 @@
       <p class="text-xs-center">
         <a [routerLink]="['/login']">Have an account?</a>
       </p>
-      <!-- BE ERRORS HERE -->
+      <error-handler
+        *ngIf="apiErrors$ | async"
+        [apiErrors]="apiErrors$ | async"
+      >
+      </error-handler>
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <fieldset>
           <fieldset class="form-group">

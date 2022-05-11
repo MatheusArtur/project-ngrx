@@ -1,4 +1,4 @@
-export interface CurrentUserInteface {
+export interface CurrentUserInterface {
   bio: string | null;
   email: string;
   image: string;

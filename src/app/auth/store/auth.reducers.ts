@@ -1,9 +1,16 @@
 import { AuthStateInterface } from 'src/app/shared/types/authState.interface';
 import { Action, createReducer, on } from '@ngrx/store';
-import { registerAction } from 'src/app/auth/store/auth.actions';
+import {
+  registerAction,
+  registerFailureAction,
+  registerSuccessAction,
+} from 'src/app/auth/store/auth.actions';
 
 const initialState: AuthStateInterface = {
   submitting: false,
+  currentUser: null,
+  validationErrors: null,
+  isLogged: null,
 };
 
 const authReducer = createReducer(
@@ -13,6 +20,24 @@ const authReducer = createReducer(
     (state): AuthStateInterface => ({
       ...state,
       submitting: true,
+      validationErrors: null,
+    })
+  ),
+  on(
+    registerSuccessAction,
+    (state, action): AuthStateInterface => ({
+      ...state,
+      submitting: false,
+      isLogged: true,
+      currentUser: action.currentUser,
+    })
+  ),
+  on(
+    registerFailureAction,
+    (state, action): AuthStateInterface => ({
+      ...state,
+      submitting: false,
+      validationErrors: action.errors,
     })
   )
 );

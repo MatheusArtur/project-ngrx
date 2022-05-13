@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ErrorHandler, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -11,6 +11,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { RegisterEffect } from 'src/app/auth/store/effects/register.effect';
 import { errorHandlerModule } from 'src/app/shared/modules/errorHandler/errorHandler.module';
 import { LocalStorageService } from 'src/app/shared/services/localStorage.service';
+import { LoginEffect } from 'src/app/auth/store/effects/login.effect';
 
 const routes = [
   {
@@ -25,7 +26,7 @@ const routes = [
     RouterModule.forChild(routes),
     ReactiveFormsModule,
     StoreModule.forFeature('auth', authReducers),
-    EffectsModule.forFeature([RegisterEffect]),
+    EffectsModule.forFeature([RegisterEffect, LoginEffect]),
     errorHandlerModule,
   ],
   declarations: [RegisterComponent],

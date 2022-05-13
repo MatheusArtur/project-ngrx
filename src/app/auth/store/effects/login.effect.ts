@@ -5,16 +5,16 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap, tap } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import {
-  registerAction,
-  registerFailureAction,
-  registerSuccessAction,
-} from 'src/app/auth/store/actions/register.actions';
+  loginAction,
+  loginFailureAction,
+  loginSuccessAction,
+} from 'src/app/auth/store/actions/login.action';
 
 import { LocalStorageService } from 'src/app/shared/services/localStorage.service';
 import { CurrentUserInterface } from 'src/app/shared/types/currentUser.interface';
 
 @Injectable()
-export class RegisterEffect {
+export class LoginEffect {
   constructor(
     private actions$: Actions,
     private authService: AuthService,
@@ -24,16 +24,16 @@ export class RegisterEffect {
 
   register$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(registerAction),
+      ofType(loginAction),
       switchMap(({ request }) => {
-        return this.authService.register(request).pipe(
+        return this.authService.login(request).pipe(
           map((currentUser: CurrentUserInterface) => {
             this.localStorageService.setKey('authToken', currentUser.token);
-            return registerSuccessAction({ currentUser });
+            return loginSuccessAction({ currentUser });
           }),
           catchError((errorsResponse: HttpErrorResponse) => {
             return of(
-              registerFailureAction({ errors: errorsResponse.error.errors })
+              loginFailureAction({ errors: errorsResponse.error.errors })
             );
           })
         );
@@ -44,7 +44,7 @@ export class RegisterEffect {
   redirectAfterLogin$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(registerSuccessAction),
+        ofType(loginSuccessAction),
         tap(() => {
           this.router.navigateByUrl('/');
         })

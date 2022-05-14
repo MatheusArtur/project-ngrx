@@ -6,16 +6,16 @@ import { CurrentUserInterface } from 'src/app/shared/types/currentUser.interface
 import { LoginRequestInterface } from 'src/app/shared/types/loginRequest.interface';
 
 export const loginAction = createAction(
-  ActionTypes.REGISTER,
+  ActionTypes.LOGIN,
   props<{ request: LoginRequestInterface }>()
 );
 
 export const loginSuccessAction = createAction(
-  ActionTypes.REGISTER_SUCCESS,
+  ActionTypes.LOGIN_SUCCESS,
   props<{ currentUser: CurrentUserInterface }>()
 );
 
 export const loginFailureAction = createAction(
-  ActionTypes.REGISTER_FAILURE,
+  ActionTypes.LOGIN_FAILURE,
   props<{ errors: ApiErrorsInterface }>()
 );

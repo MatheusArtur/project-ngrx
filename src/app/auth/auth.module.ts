@@ -12,11 +12,16 @@ import { RegisterEffect } from 'src/app/auth/store/effects/register.effect';
 import { errorHandlerModule } from 'src/app/shared/modules/errorHandler/errorHandler.module';
 import { LocalStorageService } from 'src/app/shared/services/localStorage.service';
 import { LoginEffect } from 'src/app/auth/store/effects/login.effect';
+import { LoginComponent } from 'src/app/auth/components/login/login.component';
 
 const routes = [
   {
     path: 'register',
     component: RegisterComponent,
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
   },
 ];
 
@@ -29,7 +34,7 @@ const routes = [
     EffectsModule.forFeature([RegisterEffect, LoginEffect]),
     errorHandlerModule,
   ],
-  declarations: [RegisterComponent],
+  declarations: [RegisterComponent, LoginComponent],
   providers: [AuthService, LocalStorageService],
 })
 export class AuthModule {}
